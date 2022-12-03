@@ -93,14 +93,16 @@ let myApp = {
             }
         },
         deleteList(index) {
-            this.list.splice(index,1);
-            for(let i = 0; i < this.task.length; i++){
-                if(this.task[i].listid === index){
-                    this.task.splice(i,1);
-                    i--;
+            if(confirm('Are you sure you want to delete this list and all the tasks associated?')) {
+                this.list.splice(index, 1);
+                for (let i = 0; i < this.task.length; i++) {
+                    if (this.task[i].listid === index) {
+                        this.task.splice(i, 1);
+                        i--;
+                    }
                 }
+                this.save();
             }
-            this.save();
         }
 
     }
