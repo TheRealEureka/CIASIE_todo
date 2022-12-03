@@ -20,14 +20,15 @@
     <H2>Todo List</H2>
     <br>
     <ul class="nav nav-tabs" @dragover.prevent @dragenter.prevent>
-        <li class="nav-item" @click="current_list=-1" @drop="onDrop($event, -1)" >
+        <li class="nav-item" @click="current_list=-1" @dragenter="dragAnimation($event)" @dragleave="dragAnimation($event, false)" @drop="onDrop($event, -1)" >
             <p class="clickable nav-link" :class="{active : -1 === current_list}" aria-current="page">Default</p>
         </li>
-        <li v-for="(o,k) in list" class="nav-item" @drop="onDrop($event, k)"  @click="current_list=k" >
+        <li v-for="(o,k) in list" class="nav-item"  @dragenter="dragAnimation($event)" @dragleave="dragAnimation($event, false)" @drop="onDrop($event, k)"  @click="current_list=k" >
             <p class="clickable nav-link" :class="{active : k === current_list}"  aria-current="page">{{k+1}}. {{o.name}}</p>
         </li>
     </ul>
     <h3>To do</h3>
+    <p>{{getDesc}}</p>
 
     <table class="table table-striped table-hover">
         <thead>
@@ -120,20 +121,23 @@
                 <tr>
                     <th>#</th>
                     <th>List name</th>
+                    <th>Description</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td class="col-1">0</td>
-                    <td class="col-5"><input v-model="newlist.name" class="form-control" type="text"></td>
+                    <td class="col-2"><input v-model="newlist.name" class="form-control" type="text"></td>
+                    <td class="col-3"><input v-model="newlist.description" class="form-control" type="text"></td>
                     <td class="col-2">
                         <button class="btn btn-success" @click="addList"><i class="bi bi-arrow-down-circle-fill"></i> Add</button>
                     </td>
                 </tr>
                 <tr v-for="(l,k) in list">
                     <td class="col-1">{{k+1}}</td>
-                    <td class="col-5"><input v-model="l.name" :disabled="!l.edit" class="form-control" type="text"></td>
+                    <td class="col-2"><input v-model="l.name" :disabled="!l.edit" class="form-control" type="text"></td>
+                    <td class="col-3"><input v-model="l.description" :disabled="!l.edit" class="form-control" type="text"></td>
                     <td class="col-2">
                         <button class="btn btn-warning" @click="editList(k)">
                     <span v-if="!l.edit">

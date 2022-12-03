@@ -17,7 +17,13 @@ let myApp = {
         }
     },
     computed: {
-
+        getDesc() {
+            if(this.current_list !==-1){
+                return this.list[this.current_list].description;
+            }else{
+                return "Default list"
+            }
+        }
     },
     methods: {
         undone(listid) {
@@ -66,13 +72,13 @@ let myApp = {
             return today > taskDate;
         },
         startDrag(evt, item) {
-            console.log('startDrag', item)
             evt.dataTransfer.dropEffect = 'move'
             evt.dataTransfer.effectAllowed = 'move'
             evt.dataTransfer.setData('itemID', item.id)
         },
         onDrop(evt, list) {
             this.task[evt.dataTransfer.getData('itemID')].listid = list;
+            this.dragAnimation(evt, false);
             this.save();
         },
         addList(){
@@ -94,6 +100,9 @@ let myApp = {
         },
         deleteList(index) {
             if(confirm('Are you sure you want to delete this list and all the tasks associated?')) {
+                if(this.current_list === index) {
+                    this.current_list = -1;
+                }
                 this.list.splice(index, 1);
                 for (let i = 0; i < this.task.length; i++) {
                     if (this.task[i].listid === index) {
@@ -102,6 +111,15 @@ let myApp = {
                     }
                 }
                 this.save();
+            }
+        },
+        dragAnimation(evt, enter =true) {
+            if(enter) {
+                evt.target.style.backgroundColor = 'rgba(0,0,0,0.2)';
+                evt.target.style.scale = '1.1';
+            }else{
+                evt.target.style.backgroundColor = 'rgba(0,0,0,0)';
+                evt.target.style.scale = '1';
             }
         }
 
