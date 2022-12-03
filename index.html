@@ -21,10 +21,10 @@
     <br>
     <ul class="nav nav-tabs" @dragover.prevent @dragenter.prevent>
         <li class="nav-item" @click="current_list=-1" @dragenter="dragAnimation($event)" @dragleave="dragAnimation($event, false)" @drop="onDrop($event, -1)" >
-            <p class="clickable nav-link" :class="{active : -1 === current_list}" aria-current="page">Default</p>
+            <p class="clickable nav-link" :class="{active : -1 === current_list}" aria-current="page">Default ({{countTasks(-1)}})</p>
         </li>
         <li v-for="(o,k) in list" class="nav-item"  @dragenter="dragAnimation($event)" @dragleave="dragAnimation($event, false)" @drop="onDrop($event, k)"  @click="current_list=k" >
-            <p class="clickable nav-link" :class="{active : k === current_list}"  aria-current="page">{{k+1}}. {{o.name}}</p>
+            <p class="clickable nav-link" :class="{active : k === current_list}"  aria-current="page">{{k+1}}. {{o.name}} ({{countTasks(k)}})</p>
         </li>
     </ul>
     <h3>To do</h3>

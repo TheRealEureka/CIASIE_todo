@@ -1,8 +1,9 @@
 .bgred {
     background-color: #9b434d;
 }
-.clickable {
+.clickable, .clickable:hover {
     cursor: pointer;
+    color:black;
 }
 
 .btn_right {

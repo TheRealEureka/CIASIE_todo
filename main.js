@@ -66,6 +66,11 @@ let myApp = {
                 this.task[index].edit = true;
             }
         },
+        countTasks(listid){
+            return this.task.filter(function(item) {
+                return item.listid === listid;
+            }).length;
+        },
         checkDate(date){
             let today = new Date();
             let taskDate = new Date(date);
@@ -122,7 +127,6 @@ let myApp = {
                 evt.target.style.scale = '1';
             }
         }
-
     }
 }
 
