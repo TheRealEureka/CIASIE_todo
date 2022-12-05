@@ -1,5 +1,5 @@
 # TODO Vue.JS
-Example of use of Vue.JS for school, run on http server.
+Example of using Vue.JS, try it : https://therealeureka.github.io/CIASIE_todo_vuejs/ 
 
 # Use
 
