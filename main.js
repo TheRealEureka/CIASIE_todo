@@ -11,7 +11,7 @@ let myApp = {
             task : localStorage.getItem('todo') !== null ? JSON.parse(localStorage.getItem('todo')) : [],
             list : localStorage.getItem('lists') !== null ? JSON.parse(localStorage.getItem('lists')) : [],
             newlist : {name:'', description:'', edit:false},
-            newtask : {name:'', date : '', done : false, edit : false, listid : -1},
+            newtask : {name:'', date :new Date().toLocaleDateString().split('/').reverse().join('-'), done : false, important : false, edit : false, listid : -1},
             current_list : -1,
             showpopup: false,
         }
@@ -23,20 +23,30 @@ let myApp = {
             }else{
                 return "Default list"
             }
-        }
+        },
+
     },
     methods: {
+
         undone(listid) {
-            return this.task.filter(function(item, index) {
+            let r = this.task.filter(function(item, index) {
                 item.id = index;
                 return !item.done && item.listid === listid;
             });
+            r.sort(function(a, b) {
+                return (b.important - a.important);
+            });
+            return r
         },
         done(listid) {
             return this.task.filter(function(item, index) {
                 item.id = index;
                 return item.done && item.listid === listid;
             });
+        },
+        changeTaskValue(id,attribut, value) {
+            this.task[id][attribut] = value;
+            this.save()
         },
         deleteExp(index) {
             this.task.splice(index,1);
@@ -52,7 +62,7 @@ let myApp = {
             if(this.newtask.name !== '' && this.newtask.date !== '') {
                 this.newtask.listid = this.current_list;
                 this.task.push(this.newtask);
-                this.newtask = {name:'', date : '', done : false, edit:false};
+                this.newtask = {name:'', date : new Date().toLocaleDateString().split('/').reverse().join('-'), done : false, important : false, edit:false};
                 this.save();
             }
         },
@@ -74,16 +84,18 @@ let myApp = {
         checkDate(date){
             let today = new Date();
             let taskDate = new Date(date);
+            taskDate.setDate(taskDate.getDate()+1);
+
             return today > taskDate;
         },
-        startDrag(evt, item) {
+        startDragTask(evt, item) {
             evt.dataTransfer.dropEffect = 'move'
             evt.dataTransfer.effectAllowed = 'move'
             evt.dataTransfer.setData('itemID', item.id)
         },
-        onDrop(evt, list) {
+        onDropTask(evt, list) {
             this.task[evt.dataTransfer.getData('itemID')].listid = list;
-            this.dragAnimation(evt, false);
+            this.dragAnimationTask(evt, false);
             this.save();
         },
         addList(){
@@ -118,7 +130,7 @@ let myApp = {
                 this.save();
             }
         },
-        dragAnimation(evt, enter =true) {
+        dragAnimationTask(evt, enter =true) {
             if(enter) {
                 evt.target.style.backgroundColor = 'rgba(0,0,0,0.2)';
                 evt.target.style.scale = '1.1';
@@ -126,7 +138,35 @@ let myApp = {
                 evt.target.style.backgroundColor = 'rgba(0,0,0,0)';
                 evt.target.style.scale = '1';
             }
+        },
+        startDragList(evt, id) {
+            evt.dataTransfer.dropEffect = 'move'
+            evt.dataTransfer.effectAllowed = 'move'
+            evt.dataTransfer.setData('ListID', id)
+        },
+        onDropList(evt, id) {
+            let moved = evt.dataTransfer.getData('ListID');
+            if(id !== moved){
+                let temp = this.list[moved];
+                this.list[moved] = this.list[id];
+                this.list[id] = temp;
+                this.dragAnimationList(evt, false);
+                this.save();
+            }
+
+        },
+        dragAnimationList(index, evt, enter =true) {
+            if(evt.target) {
+                let list = evt.target.closest('tr');
+                if (enter) {
+                    list.style.borderBottom = '2px solid blue';
+                } else {
+                    list.style.borderBottom = '';
+                }
+            }
         }
+
+
     }
 }
 

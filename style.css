@@ -1,9 +1,15 @@
 .bgred {
     background-color: #9b434d;
 }
+.important{
+    background-color: #9b7843;
+}
 .clickable, .clickable:hover {
     cursor: pointer;
     color:black;
+}
+.movable {
+    cursor: move;
 }
 
 .btn_right {
@@ -33,3 +39,4 @@
     z-index: 101;
     overflow: scroll;
 }
+
