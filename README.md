@@ -1,5 +1,5 @@
 # TODO Vue.JS
-Example of using Vue.JS, try it : https://therealeureka.github.io/CIASIE_todo_vuejs/ 
+Example of using Vue.JS, try it : https://therealeureka.github.io/CIASIE_todo/ 
 
 # Use
 
