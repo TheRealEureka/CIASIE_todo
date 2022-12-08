@@ -14,6 +14,8 @@ let myApp = {
             newtask : {name:'', date :new Date().toLocaleDateString().split('/').reverse().join('-'), done : false, important : false, edit : false, listid : -1},
             current_list : -1,
             showpopup: false,
+            query : '',
+            showsearch : false,
         }
     },
     computed: {
@@ -29,9 +31,10 @@ let myApp = {
     methods: {
 
         undone(listid) {
+            let q = this.query;
             let r = this.task.filter(function(item, index) {
                 item.id = index;
-                return !item.done && item.listid === listid;
+                return !item.done && item.listid === listid && item.name.toLowerCase().includes(q.toLowerCase()) ;
             });
             r.sort(function(a, b) {
                 return (b.important - a.important);
@@ -39,9 +42,11 @@ let myApp = {
             return r
         },
         done(listid) {
+            let q = this.query;
+
             return this.task.filter(function(item, index) {
                 item.id = index;
-                return item.done && item.listid === listid;
+                return item.done && item.listid === listid && item.name.toLowerCase().includes(q.toLowerCase()) ;
             });
         },
         changeTaskValue(id,attribut, value) {
@@ -164,6 +169,10 @@ let myApp = {
                     list.style.borderBottom = '';
                 }
             }
+        },
+        manageSearch(){
+            this.showsearch = !this.showsearch;
+            this.query = '';
         }
 
 

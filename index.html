@@ -30,8 +30,13 @@
     <br>
     <p>{{getDesc}}</p>
 
-    <h3>Todo</h3>
-
+    <div class="header">
+        <h3>Todo</h3>
+        <div>
+            <input v-show="showsearch" class="form-control" type="text" v-model="query" placeholder="Enter filter ...">
+            <button class="btn btn-primary" @click="manageSearch()"><i class="bi bi-search"></i></button>
+        </div>
+    </div>
     <table class="table table-striped table-hover">
         <thead>
         <tr>
