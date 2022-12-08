@@ -73,7 +73,7 @@ let myApp = {
         },
         editExp(index){
             if(this.task[index].edit === true) {
-                if(this.task.name !== '' && this.task.date !== '') {
+                if(this.task[index].name !== '') {
                     this.task[index].edit = false;
                     this.save();
                 }
@@ -112,7 +112,7 @@ let myApp = {
         },
         editList(index){
             if(this.list[index].edit === true) {
-                if(this.list.name !== '') {
+                if(this.list[index].name !== '') {
                     this.list[index].edit = false;
                     this.save();
                 }
