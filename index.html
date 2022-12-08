@@ -43,15 +43,15 @@
         </thead>
         <tbody>
         <tr>
-            <td>0</td>
-            <td><input v-model="newtask.name" class="form-control" type="text"></td>
-            <td><input v-model="newtask.date" class="form-control" type="date"></td>
-            <td class="col-2">
+            <td class="col-1">0</td>
+            <td class="col-5"><input v-model="newtask.name" class="form-control" type="text"></td>
+            <td class="col-4"><input v-model="newtask.date" class="form-control" type="date"></td>
+            <td class="col-3">
                 <button class="btn btn-success" @click="addExp"><i class="bi bi-arrow-down-circle-fill"></i> Add
                 </button>
             </td>
         </tr>
-        <tr v-for="(t, key) in undone(current_list)" :class="{bgred : checkDate(t.date), important : t.important}" draggable="true" @dragstart="startDragTask($event, t)">
+        <tr v-for="(t, key) in undone(current_list)" class="movable" :class="{bgred : checkDate(t.date), important : t.important}" draggable="true" @dragstart="startDragTask($event, t)">
             <td class="col-1">{{ key + 1 }}</td>
             <td class="col-5"><input v-model="t.name" :disabled="!t.edit" class="form-control" type="text"></td>
             <td class="col-4"><input v-model="t.date" :disabled="!t.edit" class="form-control" type="date"></td>
@@ -90,7 +90,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(t, key) in done(current_list)" draggable="true" @dragstart="startDragTask($event, t)" >
+        <tr v-for="(t, key) in done(current_list)" class="movable"  draggable="true" @dragstart="startDragTask($event, t)" >
             <td class="col-1">{{ key + 1 }}</td>
             <td class="col-5"><input v-model="t.name" :disabled="!t.edit" class="form-control" type="text"></td>
             <td class="col-4"><input v-model="t.date" :disabled="!t.edit" class="form-control" type="date"></td>
