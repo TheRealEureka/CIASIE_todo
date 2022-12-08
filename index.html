@@ -49,7 +49,7 @@
         <tbody>
         <tr>
             <td class="col-1">0</td>
-            <td class="col-5"><input v-model="newtask.name" class="form-control" type="text"></td>
+            <td class="col-5"><input v-model="newtask.name" class="form-control" type="text" placeholder="My task"></td>
             <td class="col-4"><input v-model="newtask.date" class="form-control" type="date"></td>
             <td class="col-3">
                 <button class="btn btn-success" @click="addExp"><i class="bi bi-arrow-down-circle-fill"></i> Add
@@ -136,8 +136,8 @@
                 <tr>
                     <td class="col-1"></td>
                     <td class="col-1">0</td>
-                    <td class="col-2"><input v-model="newlist.name" class="form-control" type="text"></td>
-                    <td class="col-3"><input v-model="newlist.description" class="form-control" type="text"></td>
+                    <td class="col-2"><input v-model="newlist.name" class="form-control" type="text" placeholder="Work"></td>
+                    <td class="col-3"><input v-model="newlist.description" class="form-control" type="text" placeholder="My todo list for work"></td>
                     <td class="col-2">
                         <button class="btn btn-success" @click="addList"><i class="bi bi-arrow-down-circle-fill"></i> Add</button>
                     </td>
@@ -146,8 +146,8 @@
                     <td class="col-1"><i class="bi bi-list"></i></td>
                     <td class="col-1">{{k+1}}</td>
 
-                    <td class="col-2"><input v-model="l.name" :disabled="!l.edit" class="form-control" type="text"></td>
-                    <td class="col-3"><input v-model="l.description" :disabled="!l.edit" class="form-control" type="text"></td>
+                    <td class="col-2"><input v-model="l.name" :disabled="!l.edit" class="form-control" type="text" ></td>
+                    <td class="col-3"><input v-model="l.description" :disabled="!l.edit" class="form-control" type="text" ></td>
                     <td class="col-2">
                         <button class="btn btn-warning" @click="editList(k)">
                     <span v-if="!l.edit">

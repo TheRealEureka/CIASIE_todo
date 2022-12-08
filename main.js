@@ -121,7 +121,7 @@ let myApp = {
             }
         },
         deleteList(index) {
-            if(confirm('Are you sure you want to delete this list and all the tasks associated?')) {
+            if(this.countTasks(index) === 0 || confirm('Are you sure you want to delete this list and all the tasks associated?')) {
                 if(this.current_list === index) {
                     this.current_list = -1;
                 }
