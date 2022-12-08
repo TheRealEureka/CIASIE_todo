@@ -56,15 +56,15 @@
             <td class="col-5"><input v-model="t.name" :disabled="!t.edit" class="form-control" type="text"></td>
             <td class="col-4"><input v-model="t.date" :disabled="!t.edit" class="form-control" type="date"></td>
             <td class="col-3">
-                <button class="btn btn-primary" @click="changeTaskValue(t.id, 'done',true)">
+                <button class="btn btn-primary" @click="changeTaskValue(t.id, 'done',true)" title="Set as done">
                     <i class="bi bi-arrow-down-up"></i>
                 </button>
                 &nbsp;
-                <button class="btn btn-warning" @click="changeTaskValue(t.id, 'important',!t.important)">
+                <button class="btn btn-warning" @click="changeTaskValue(t.id, 'important',!t.important)" title="Set as important">
                     <i class="bi bi-exclamation-lg"></i>
                 </button>
                 &nbsp;
-                <button class="btn btn-success" @click="editExp(t.id)">
+                <button class="btn btn-success" @click="editExp(t.id)" title="Edit task">
                     <span v-if="!t.edit">
                     <i class="bi bi-pencil"></i>
                     </span><span v-else>
@@ -72,7 +72,7 @@
                 </span>
                 </button>
                 &nbsp;
-                <button class="btn btn-danger" @click="deleteExp(t.id)"><i class="bi bi-trash"></i> </button>
+                <button class="btn btn-danger" @click="deleteExp(t.id)" title="Delete task"><i class="bi bi-trash"></i> </button>
             </td>
 
         </tr>
@@ -95,11 +95,11 @@
             <td class="col-5"><input v-model="t.name" :disabled="!t.edit" class="form-control" type="text"></td>
             <td class="col-4"><input v-model="t.date" :disabled="!t.edit" class="form-control" type="date"></td>
             <td class="col-3">
-                <button class="btn btn-primary" @click="changeTaskValue(t.id, 'done',false)">
+                <button class="btn btn-primary" @click="changeTaskValue(t.id, 'done',false)" title="Set as todo">
                     <i class="bi bi-arrow-down-up"></i>
                 </button>
                 &nbsp;
-                <button class="btn btn-success" @click="editExp(t.id)">
+                <button class="btn btn-success" @click="editExp(t.id)" title="Edit task">
                     <span v-if="!t.edit">
                     <i class="bi bi-pencil"></i>
                     </span><span v-else>
@@ -107,7 +107,7 @@
                 </span>
                 </button>
                 &nbsp;
-                <button class="btn btn-danger" @click="deleteExp(t.id)"><i class="bi bi-trash"></i> </button>
+                <button class="btn btn-danger" @click="deleteExp(t.id)" title="Delete task"><i class="bi bi-trash"></i> </button>
             </td>
         </tr>
         </tbody>
@@ -137,7 +137,7 @@
                         <button class="btn btn-success" @click="addList"><i class="bi bi-arrow-down-circle-fill"></i> Add</button>
                     </td>
                 </tr>
-                <tr class="movable" v-for="(l,k) in list" draggable="true" @dragstart="startDragList($event, k)" @dragover.prevent @dragenter.prevent  @dragenter="dragAnimationList(k, $event)" @dragleave="dragAnimationList(k, $event, false)" @drop="onDropList($event, k)">
+                <tr class="movable" v-for="(l,k) in list" draggable="true" @dragstart="startDragList($event, k)" @dragover.prevent @dragenter.prevent  @dragenter="dragAnimationList($event)" @dragleave="dragAnimationList($event, false)" @drop="onDropList($event, k)">
                     <td class="col-1"><i class="bi bi-list"></i></td>
                     <td class="col-1">{{k+1}}</td>
 
@@ -151,7 +151,7 @@
                     <i class="bi bi-check-lg"></i>
                        </span>
                         </button>
-                        &nbsp
+                        &nbsp;
 
                         <button class="btn btn-danger" @click="deleteList(k)"><i class="bi bi-trash"></i> </button>
                     </td>

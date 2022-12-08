@@ -155,7 +155,7 @@ let myApp = {
             }
 
         },
-        dragAnimationList(index, evt, enter =true) {
+        dragAnimationList(evt, enter =true) {
             if(evt.target) {
                 let list = evt.target.closest('tr');
                 if (enter) {
